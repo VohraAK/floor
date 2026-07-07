@@ -1,6 +1,4 @@
 use std::collections::HashMap;
-use uuid::Uuid;
-
 use crate::book::OrderBook;
 use crate::event_types::{RejectionReport};
 use crate::order::{Order, Trade};
@@ -15,11 +13,11 @@ pub struct Exchange {
 }
 
 impl Exchange {
-    // pub fn new() -> Self {
-    //     Self {
-    //         books: HashMap::new(),
-    //     }
-    // }
+    pub fn new() -> Self {
+        Self {
+            books: HashMap::new(),
+        }
+    }
 
     pub fn with_tickers(tickers: Vec<String>) -> Self {
         let books = tickers.into_iter().map(|t| (t, OrderBook::new())).collect();
@@ -71,11 +69,9 @@ impl Exchange {
             }
             
             Some(book) => {
-                
+                let trades = book.match_order(order);
+                return Ok(trades);
             }
-
-            
-        }
-        
+        }        
     }
 }
