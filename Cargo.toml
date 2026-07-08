@@ -4,3 +4,4 @@ members = ["exchange", "trader", "shared"]
 
 [workspace.dependencies]
 uuid = { version = "1.23.3", features = ["v4"] }
+rand = "0.8"

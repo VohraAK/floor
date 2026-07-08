@@ -21,6 +21,36 @@ impl OrderBook {
         }
     }
 
+    // highest resting bid price
+    pub fn best_bid(&self) -> Option<u64> {
+        self.bids.first_key_value().map(|(p, _)| p.0)
+    }
+
+    // lowest resting ask price
+    pub fn best_ask(&self) -> Option<u64> {
+        self.asks.first_key_value().map(|(p, _)| *p)
+    }
+
+    // ask - bid at the top of book
+    pub fn spread(&self) -> Option<u64> {
+        self.best_ask()?.checked_sub(self.best_bid()?)
+    }
+
+    // midpoint between best bid and best ask
+    pub fn mid_price(&self) -> Option<f64> {
+        Some((self.best_bid()? + self.best_ask()?) as f64 / 2.0)
+    }
+
+    // total resting qty at the best bid price level
+    pub fn best_bid_qty(&self) -> Option<u64> {
+        self.bids.first_key_value().map(|(_, level)| level.iter().map(|o| o.qty).sum())
+    }
+
+    // total resting qty at the best ask price level
+    pub fn best_ask_qty(&self) -> Option<u64> {
+        self.asks.first_key_value().map(|(_, level)| level.iter().map(|o| o.qty).sum())
+    }
+
     // rest an order
     pub fn rest(&mut self, order: Order) {
         match order.side {

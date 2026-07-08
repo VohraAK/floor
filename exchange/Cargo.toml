@@ -6,3 +6,6 @@ edition = "2024"
 [dependencies]
 shared = { path = "../shared" }
 uuid = { workspace = true }
+
+[dev-dependencies]
+rand = { workspace = true }
