@@ -1,5 +1,5 @@
 use uuid::Uuid;
-use floor::event_types::RejectionReport;
+use shared::event_types::RejectionReport;
 
 fn main()
 {

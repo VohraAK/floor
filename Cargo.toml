@@ -1,13 +1,6 @@
-[package]
-name = "floor"
-version = "0.1.0"
-edition = "2024"
+[workspace]
+resolver = "2"
+members = ["exchange", "trader", "shared"]
 
-[dependencies]
-
-[dependencies.uuid]
-version = "1.23.3"
-# Lets you generate random UUIDs
-features = [
-    "v4",
-]
+[workspace.dependencies]
+uuid = { version = "1.23.3", features = ["v4"] }
